@@ -2815,3 +2815,502 @@ body::after {
 .gc-dot.filled {
   background-color: #1f3a93;
 }
+
+/* =====================================================
+   POWER ANIMATIONS — added on top of existing UI
+   No layout or color changes; motion layer only
+   ===================================================== */
+
+/* ─── Keyframes Library ─────────────────────────────── */
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideLeft {
+  from { opacity: 0; transform: translateX(50px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeSlideRight {
+  from { opacity: 0; transform: translateX(-50px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes logoPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.6); transform: scale(1); }
+  50%       { box-shadow: 0 0 0 6px rgba(139, 92, 246, 0); transform: scale(1.2); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes badgeGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+  50%       { box-shadow: 0 0 14px 3px rgba(139, 92, 246, 0.35); }
+}
+
+@keyframes scanLine {
+  0%   { top: -4px; opacity: 0.7; }
+  50%  { opacity: 1; }
+  100% { top: calc(100% + 4px); opacity: 0; }
+}
+
+@keyframes orbDrift1 {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(60px, -40px) scale(1.08); }
+  66%  { transform: translate(-30px, 50px) scale(0.95); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes orbDrift2 {
+  0%   { transform: translate(0, 0) scale(1); }
+  40%  { transform: translate(-70px, 30px) scale(1.05); }
+  70%  { transform: translate(40px, -60px) scale(0.92); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes buttonShine {
+  0%   { left: -100%; opacity: 0; }
+  20%  { opacity: 0.6; }
+  100% { left: 130%; opacity: 0; }
+}
+
+@keyframes inputGlowPulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(139, 92, 246, 0.15); }
+  50%       { box-shadow: 0 0 18px rgba(139, 92, 246, 0.4); }
+}
+
+@keyframes emptyBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(-10px) scale(1.06); }
+}
+
+@keyframes tagPopIn {
+  0%   { opacity: 0; transform: scale(0.7) translateY(6px); }
+  70%  { transform: scale(1.05) translateY(-2px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes cardEntrance {
+  from { opacity: 0; transform: translateY(50px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes heroTextEntrance {
+  0%   { opacity: 0; transform: translateY(60px) skewY(3deg); }
+  100% { opacity: 1; transform: translateY(0) skewY(0deg); }
+}
+
+@keyframes navSlideIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mockupEntrance {
+  from { opacity: 0; transform: rotateY(-30deg) rotateX(20deg) rotateZ(-5deg) translateY(40px) scale(0.9); }
+  to   { opacity: 1; transform: rotateY(-18deg) rotateX(15deg) rotateZ(-3deg) translateY(0) scale(1); }
+}
+
+@keyframes filterBarSlideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes sectionTagReveal {
+  from { opacity: 0; letter-spacing: 6px; }
+  to   { opacity: 1; letter-spacing: 2px; }
+}
+
+@keyframes underlineDraw {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+@keyframes progressFill {
+  from { width: 0; }
+  to   { width: var(--fill-width, 80%); }
+}
+
+@keyframes iconSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ─── Navbar ─────────────────────────────────────────── */
+
+.navbar-wrapper {
+  animation: navSlideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.logo-dot {
+  animation: logoPulse 2.6s ease-in-out infinite;
+}
+
+/* Shimmer sweep on logo text on hover */
+.logo:hover {
+  background: linear-gradient(
+    90deg,
+    #fff 0%,
+    var(--color-primary) 40%,
+    #a5b4fc 60%,
+    var(--color-text-muted) 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 1.4s linear infinite;
+}
+
+/* Nav link active underline draw */
+.nav-links a.active::after {
+  animation: underlineDraw 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ─── Background Orb Animation ───────────────────────── */
+
+body::before {
+  animation: orbDrift1 18s ease-in-out infinite;
+}
+
+body::after {
+  animation: orbDrift2 22s ease-in-out infinite;
+}
+
+/* ─── Hero Section ───────────────────────────────────── */
+
+.hero-badge {
+  animation: fadeSlideDown 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+  animation-name: fadeSlideDown, badgeGlow;
+  animation-duration: 0.7s, 3s;
+  animation-delay: 0.2s, 1s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1), ease-in-out;
+  animation-fill-mode: both, none;
+  animation-iteration-count: 1, infinite;
+}
+
+.hero-text h1 {
+  animation: heroTextEntrance 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+.hero-text p {
+  animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.65s both;
+}
+
+.hero-buttons {
+  animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both;
+}
+
+/* Mockup 3D entrance */
+.mockup-container {
+  animation: mockupEntrance 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both,
+             float 6s ease-in-out 1.6s infinite;
+}
+
+/* Scanning line over the mockup resume card */
+.resume-card {
+  overflow: hidden;
+}
+
+.resume-card::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(139, 92, 246, 0.6) 40%,
+    rgba(99, 102, 241, 0.9) 50%,
+    rgba(139, 92, 246, 0.6) 60%,
+    transparent 100%
+  );
+  filter: blur(1px);
+  animation: scanLine 3.5s ease-in-out 2s infinite;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Floating badges entrance */
+.floating-badge.badge-1 {
+  animation: fadeSlideRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.2s both,
+             float-slow 7s ease-in-out 2s infinite alternate;
+}
+
+.floating-badge.badge-2 {
+  animation: fadeSlideLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.4s both,
+             float-slow 5s ease-in-out 2.2s infinite alternate-reverse;
+}
+
+/* ─── Features Section ───────────────────────────────── */
+
+.section-header {
+  animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.section-tag {
+  animation: sectionTagReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+/* Staggered feature cards */
+.features-grid .feature-card:nth-child(1) { animation: cardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; }
+.features-grid .feature-card:nth-child(2) { animation: cardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.22s both; }
+.features-grid .feature-card:nth-child(3) { animation: cardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.34s both; }
+.features-grid .feature-card:nth-child(4) { animation: cardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.46s both; }
+.features-grid .feature-card:nth-child(5) { animation: cardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.58s both; }
+.features-grid .feature-card:nth-child(6) { animation: cardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.70s both; }
+
+/* Icon pop on card entrance */
+.feature-icon-wrapper {
+  transition: var(--transition-smooth);
+}
+.feature-card:hover .feature-icon-wrapper {
+  animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─── Button Shine Sweep ─────────────────────────────── */
+
+.btn-primary,
+.create-btn,
+.create-resume-btn,
+.empty-create-btn,
+.ctrl-btn.export,
+.template-btn.primary,
+.modal-btn.delete {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after,
+.create-btn::after,
+.create-resume-btn::after,
+.empty-create-btn::after,
+.ctrl-btn.export::after,
+.template-btn.primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: none;
+}
+
+.btn-primary:hover::after,
+.create-btn:hover::after,
+.create-resume-btn:hover::after,
+.empty-create-btn:hover::after,
+.ctrl-btn.export:hover::after,
+.template-btn.primary:hover::after {
+  animation: buttonShine 0.6s ease forwards;
+}
+
+/* ─── Input Focus Pulse ──────────────────────────────── */
+
+.input-group input:focus,
+.input-group textarea:focus {
+  animation: inputGlowPulse 1.8s ease-in-out infinite;
+}
+
+/* ─── Templates Page ─────────────────────────────────── */
+
+.templates-hero-content {
+  animation: fadeSlideUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+.category-filters {
+  animation: filterBarSlideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+}
+
+/* Staggered template cards */
+.templates-grid .template-card:nth-child(1)  { animation: cardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; }
+.templates-grid .template-card:nth-child(2)  { animation: cardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
+.templates-grid .template-card:nth-child(3)  { animation: cardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both; }
+.templates-grid .template-card:nth-child(4)  { animation: cardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; }
+.templates-grid .template-card:nth-child(5)  { animation: cardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both; }
+.templates-grid .template-card:nth-child(6)  { animation: cardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both; }
+.templates-grid .template-card:nth-child(7)  { animation: cardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both; }
+.templates-grid .template-card:nth-child(8)  { animation: cardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both; }
+
+/* Template mock 3D tilt entrance */
+.template-mock {
+  animation: scaleUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+/* Preview overlay button rises smoother */
+.preview-btn-overlay {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s ease,
+              background 0.3s ease;
+}
+
+/* ─── Dashboard Page ─────────────────────────────────── */
+
+.dashboard-greeting-area h1 {
+  animation: fadeSlideRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+.dashboard-greeting-area p {
+  animation: fadeSlideRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.create-resume-btn {
+  animation: fadeSlideLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+/* Staggered resume cards */
+.resumes-grid .dashboard-resume-card:nth-child(1)  { animation: cardEntrance 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both; }
+.resumes-grid .dashboard-resume-card:nth-child(2)  { animation: cardEntrance 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both; }
+.resumes-grid .dashboard-resume-card:nth-child(3)  { animation: cardEntrance 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both; }
+.resumes-grid .dashboard-resume-card:nth-child(4)  { animation: cardEntrance 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both; }
+.resumes-grid .dashboard-resume-card:nth-child(5)  { animation: cardEntrance 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both; }
+.resumes-grid .dashboard-resume-card:nth-child(6)  { animation: cardEntrance 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both; }
+.resumes-grid .dashboard-resume-card:nth-child(7)  { animation: cardEntrance 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.65s both; }
+.resumes-grid .dashboard-resume-card:nth-child(8)  { animation: cardEntrance 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both; }
+
+/* Empty state icon bounce */
+.empty-icon-wrapper {
+  animation: emptyBounce 2.8s ease-in-out infinite;
+}
+
+.dashboard-empty-state h2 {
+  animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.dashboard-empty-state p {
+  animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+.dashboard-empty-state .empty-create-btn {
+  animation: scaleUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+}
+
+/* ─── Editor Page ────────────────────────────────────── */
+
+.editor-workspace-header {
+  animation: fadeSlideDown 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.editor-form-col {
+  animation: fadeSlideRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+
+.editor-preview-col {
+  animation: fadeSlideLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+}
+
+/* Accordion open content slide in */
+.form-section-accordion.open .accordion-content {
+  animation: fadeSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Skill tags stagger pop-in */
+.skill-tag {
+  animation: tagPopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.tags-container .skill-tag:nth-child(1) { animation-delay: 0.0s; }
+.tags-container .skill-tag:nth-child(2) { animation-delay: 0.06s; }
+.tags-container .skill-tag:nth-child(3) { animation-delay: 0.12s; }
+.tags-container .skill-tag:nth-child(4) { animation-delay: 0.18s; }
+.tags-container .skill-tag:nth-child(5) { animation-delay: 0.24s; }
+.tags-container .skill-tag:nth-child(6) { animation-delay: 0.30s; }
+.tags-container .skill-tag:nth-child(7) { animation-delay: 0.36s; }
+.tags-container .skill-tag:nth-child(8) { animation-delay: 0.42s; }
+
+/* ─── Modal ──────────────────────────────────────────── */
+
+/* Modal overlay and container already use fadeIn/scaleIn;
+   enhance the icon wrapper */
+.modal-icon-wrapper {
+  animation: emptyBounce 2.4s ease-in-out 0.3s infinite;
+}
+
+/* ─── Footer ─────────────────────────────────────────── */
+
+.footer-brand {
+  animation: fadeSlideRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.footer-links-grid {
+  animation: fadeSlideLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+/* Social link spin-in on hover */
+.social-link:hover {
+  animation: iconSpin 0.4s ease-out;
+}
+
+/* ─── Scrollbar thumb pulse on scroll ───────────────── */
+::-webkit-scrollbar-thumb {
+  transition: background 0.3s ease;
+}
+
+/* ─── Loader ─────────────────────────────────────────── */
+.spinner {
+  animation: spin 0.8s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+/* ─── Mockup skill tags shimmer ─────────────────────── */
+.mockup-skill-tag {
+  position: relative;
+  overflow: hidden;
+}
+
+.mockup-skill-tag::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(139, 92, 246, 0.25),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: buttonShine 3s ease-in-out 2s infinite;
+}
+
+/* ─── Page transition enhancement ───────────────────── */
+.page-transition {
+  animation: pageFadeIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(14px) scale(0.99); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
+/* ─── Respect reduced motion preferences ─────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
