@@ -95,7 +95,7 @@ function Dashboard() {
   };
 
   const handleCreate = () => {
-    navigate("/editor");
+    navigate("/templates");
   };
 
   return (

@@ -46,7 +46,7 @@ function Navbar() {
         <div className="nav-actions">
           {token ? (
             <>
-              <button className="create-btn" onClick={() => navigate("/editor")}>
+              <button className="create-btn" onClick={() => navigate("/templates")}>
                 Create Resume
                 <ArrowRight size={16} />
               </button>
@@ -101,7 +101,7 @@ function Navbar() {
           {token && <a href="/profile" style={{ color: "var(--color-text-muted)", textDecoration: "none", fontSize: "16px" }}>Profile</a>}
           {token ? (
             <>
-              <button className="create-btn" style={{ width: "100%", justifyContent: "center" }} onClick={() => { navigate("/editor"); setMobileMenuOpen(false); }}>
+              <button className="create-btn" style={{ width: "100%", justifyContent: "center" }} onClick={() => { navigate("/templates"); setMobileMenuOpen(false); }}>
                 Create Resume
                 <ArrowRight size={16} />
               </button>

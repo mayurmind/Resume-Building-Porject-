@@ -1,6 +1,6 @@
 import { Eye, Edit3 } from "lucide-react";
 
-function TemplateCard({ id, name, category, description }) {
+function TemplateCard({ id, name, category, description, onUseTemplate }) {
   // Helper to render mock representation of the template structure
   const renderTemplateMockup = () => {
     switch (id) {
@@ -114,7 +114,7 @@ function TemplateCard({ id, name, category, description }) {
             <Eye size={15} />
             Preview
           </button>
-          <button className="template-btn primary">
+          <button className="template-btn primary" onClick={() => onUseTemplate(id)}>
             <Edit3 size={15} />
             Use Template
           </button>

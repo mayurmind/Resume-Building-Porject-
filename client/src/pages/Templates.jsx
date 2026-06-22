@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import TemplateCard from "../components/TemplateCard";
 import Footer from "../components/Footer";
@@ -6,6 +7,7 @@ import { Award } from "lucide-react";
 
 function Templates() {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const navigate = useNavigate();
 
   const templatesData = [
     {
@@ -31,6 +33,12 @@ function Templates() {
       name: "Creative Spark",
       category: "Creative",
       description: "Bold highlights and grid blocks. Fits designers, marketers, and creative fields."
+    },
+    {
+      id: "google-expert",
+      name: "Google Developer Expert",
+      category: "Modern",
+      description: "Two-column layout with a top header and honeycomb background, inspired by Google Developer Experts."
     },
     {
       id: "ats-friendly",
@@ -86,6 +94,7 @@ function Templates() {
               name={template.name}
               category={template.category}
               description={template.description}
+              onUseTemplate={(id) => navigate(`/editor?template=${id}`)}
             />
           ))}
         </div>

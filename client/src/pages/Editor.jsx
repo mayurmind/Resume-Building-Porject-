@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import ResumeForm from "../components/ResumeForm";
 import ResumePreview from "../components/ResumePreview";
@@ -44,6 +44,7 @@ const INITIAL_DATA = {
 
 function Editor() {
   const { id } = useParams();
+  const location = useLocation();
   const [resumeData, setResumeData] = useState(INITIAL_DATA);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -54,7 +55,13 @@ function Editor() {
     Promise.resolve().then(() => {
       if (!active) return;
       if (!id) {
-        setResumeData(INITIAL_DATA);
+        const queryParams = new URLSearchParams(location.search);
+        const templateParam = queryParams.get("template");
+        
+        setResumeData({
+          ...INITIAL_DATA,
+          template: templateParam || INITIAL_DATA.template
+        });
         setLoading(false);
         return;
       }

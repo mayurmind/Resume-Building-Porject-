@@ -120,6 +120,7 @@ function ResumeForm({
                   <option value="professional" style={{ background: "var(--bg-secondary)", color: "white" }}>Professional</option>
                   <option value="minimal" style={{ background: "var(--bg-secondary)", color: "white" }}>Minimal</option>
                   <option value="creative" style={{ background: "var(--bg-secondary)", color: "white" }}>Creative</option>
+                  <option value="google-expert" style={{ background: "var(--bg-secondary)", color: "white" }}>Google Developer Expert</option>
                   <option value="ats-friendly" style={{ background: "var(--bg-secondary)", color: "white" }}>ATS Friendly</option>
                 </select>
               </div>

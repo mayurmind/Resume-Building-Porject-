@@ -2403,3 +2403,200 @@ body::after {
   from { transform: scale(0.95); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
+
+/* Google Developer Expert Template Styles */
+.google-expert-template {
+  position: relative;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  color: #111;
+  padding: 40px !important;
+  background-color: #fff !important;
+}
+
+/* Honeycomb Background */
+.google-expert-template::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.05;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='69.2820323027551' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 17.32050807568877l-20 11.547005383792516L0 17.32050807568877V-5.773502691896258l20-11.547005383792516 20 11.547005383792516V17.32050807568877zm0 46.18802153831754l-20 11.547005383792515-20-11.547005383792515V40.41451884642128l20-11.547005383792516 20 11.547005383792516v23.09401076758503zM20 51.96152422706631l-20 11.547005383792516-20-11.547005383792515V28.86751345952877l20-11.547005383792516 20 11.547005383792516v23.09401076758503z' fill='%23000000' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E");
+  z-index: 0;
+}
+
+.ge-header, .ge-body-columns {
+  position: relative;
+  z-index: 1;
+}
+
+.ge-header {
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.ge-name {
+  font-size: 32px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.ge-subtitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2563eb;
+  margin: 4px 0 12px 0;
+}
+
+.ge-contact-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 11px;
+  color: #475569;
+  font-weight: 500;
+}
+
+.ge-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ge-contact-item svg {
+  color: #2563eb;
+}
+
+.ge-body-columns {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 30px;
+}
+
+.ge-section {
+  margin-bottom: 20px;
+}
+
+.ge-section-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #000;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.ge-section-line {
+  height: 2px;
+  background-color: #000;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.ge-summary-text {
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: #334155;
+  text-align: justify;
+}
+
+.ge-experience-list, .ge-education-list, .ge-skills-list, .ge-projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ge-experience-item, .ge-education-item, .ge-project-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ge-exp-role, .ge-edu-degree, .ge-project-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.ge-exp-company, .ge-edu-college {
+  font-size: 12px;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.ge-exp-meta, .ge-edu-meta {
+  font-size: 10.5px;
+  color: #64748b;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.ge-exp-desc {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #475569;
+  margin: 0;
+  padding-left: 16px;
+}
+
+.ge-exp-desc li {
+  margin-bottom: 4px;
+}
+
+.ge-project-desc {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #475569;
+  margin: 0;
+}
+
+.ge-project-link {
+  font-size: 10.5px;
+  color: #64748b;
+  word-break: break-all;
+}
+
+/* Skill Ratings */
+.ge-skill-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ge-skill-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.ge-skill-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.ge-skill-level {
+  font-size: 10px;
+  color: #64748b;
+}
+
+.ge-skill-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.ge-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #e2e8f0;
+}
+
+.ge-dot.filled {
+  background-color: #2563eb;
+}
