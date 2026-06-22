@@ -52,9 +52,9 @@ function Footer() {
           &copy; {new Date().getFullYear()} ResumeForge. All rights reserved.
         </div>
         <div className="footer-policy">
-          <a href="#">Terms of Service</a>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Sitemap</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/sitemap">Sitemap</a>
         </div>
       </div>
     </footer>

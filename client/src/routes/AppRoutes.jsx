@@ -9,6 +9,9 @@ import Profile from "../pages/Profile";
 import NotFound from "../pages/NotFound";
 import ProtectedRoute from "../components/ProtectedRoute";
 import PageWrapper from "../components/PageWrapper";
+import TermsOfService from "../pages/TermsOfService";
+import PrivacyPolicy from "../pages/PrivacyPolicy";
+import Sitemap from "../pages/Sitemap";
 
 function AppRoutes() {
   return (
@@ -18,6 +21,9 @@ function AppRoutes() {
         <Route path="/templates" element={<Templates />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/terms" element={<TermsOfService />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/sitemap" element={<Sitemap />} />
         
         <Route element={<ProtectedRoute />}>
           <Route path="/editor" element={<Editor />} />
