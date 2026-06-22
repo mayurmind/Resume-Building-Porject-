@@ -13,42 +13,48 @@ function Templates() {
     {
       id: "modern",
       name: "Modern Design",
-      category: "Modern",
+      category: "Other Companies",
       description: "Clean side-column hierarchy with colored accent headers. Best for tech and startup roles."
     },
     {
       id: "professional",
       name: "Executive Professional",
-      category: "Executive",
+      category: "Other Companies",
       description: "Structured split layouts with high readability. Designed for managers and executives."
     },
     {
       id: "minimal",
       name: "Minimalist Elegance",
-      category: "Minimalist",
+      category: "Other Companies",
       description: "Centered sleek headers and generous whitespace. Elegant look for writers and researchers."
     },
     {
       id: "creative",
       name: "Creative Spark",
-      category: "Creative",
+      category: "Other Companies",
       description: "Bold highlights and grid blocks. Fits designers, marketers, and creative fields."
     },
     {
       id: "google-expert",
       name: "Google Developer Expert",
-      category: "Modern",
+      category: "Google",
       description: "Two-column layout with a top header and honeycomb background, inspired by Google Developer Experts."
+    },
+    {
+      id: "google-cloud",
+      name: "Google Cloud Engineer",
+      category: "Google",
+      description: "Clean two-column layout with blue accents and key achievement highlights. Perfect for cloud engineers."
     },
     {
       id: "ats-friendly",
       name: "ATS Optimized Plain",
-      category: "ATS Optimized",
+      category: "Other Companies",
       description: "Classic layout focusing purely on standard fonts and structures. Matches automatic scanner guidelines."
     }
   ];
 
-  const categories = ["All", "Modern", "Executive", "Minimalist", "Creative", "ATS Optimized"];
+  const categories = ["All", "Google", "Microsoft", "Other Companies"];
 
   const filteredTemplates = selectedCategory === "All" 
     ? templatesData 

@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Globe, Briefcase, GraduationCap, Cpu, Layers } from "lucide-react";
+import { Mail, Phone, MapPin, Globe, Briefcase, GraduationCap, Cpu, Layers, Star, Trophy, Calendar } from "lucide-react";
 
 const StandardTemplate = ({ data }) => {
   const { personal, summary, education, skills, experience, projects } = data;
@@ -303,9 +303,212 @@ const GoogleExpertTemplate = ({ data }) => {
   );
 };
 
+const GoogleCloudTemplate = ({ data }) => {
+  const { personal, summary, education, skills, experience, projects } = data;
+  
+  return (
+    <div className="preview-paper-wrapper">
+      <div className="preview-paper-a4 google-cloud-template" id="resume-preview">
+        {/* Header Block */}
+        <header className="gc-header">
+          <h1 className="gc-name">{personal.name ? personal.name.toUpperCase() : "OLIVER DAVIS"}</h1>
+          <p className="gc-subtitle">
+            {experience && experience[0]?.role ? experience[0].role : "Cloud Engineer | Cloud Infrastructure | GCP"}
+          </p>
+          
+          <div className="gc-contact-grid">
+            {personal.phone && (
+              <span className="gc-contact-item">
+                <Phone size={10} /> {personal.phone}
+              </span>
+            )}
+            {personal.email && (
+              <span className="gc-contact-item">
+                <Mail size={10} /> {personal.email}
+              </span>
+            )}
+            {personal.linkedin && (
+              <span className="gc-contact-item">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg> {personal.linkedin}
+              </span>
+            )}
+            {personal.portfolio && (
+              <span className="gc-contact-item">
+                <Globe size={10} /> {personal.portfolio}
+              </span>
+            )}
+            {personal.location && (
+              <span className="gc-contact-item">
+                <MapPin size={10} /> {personal.location}
+              </span>
+            )}
+          </div>
+        </header>
+
+        {/* Two Column Layout */}
+        <div className="gc-body-columns">
+          {/* Left Column */}
+          <div className="gc-left-col">
+            {summary && (
+              <section className="gc-section">
+                <h2 className="gc-section-title">SUMMARY</h2>
+                <div className="gc-section-line"></div>
+                <p className="gc-summary-text">{summary}</p>
+              </section>
+            )}
+
+            {projects && projects.length > 0 && projects.some(proj => proj.name) && (
+              <section className="gc-section">
+                <h2 className="gc-section-title">PROJECTS</h2>
+                <div className="gc-section-line"></div>
+                <div className="gc-projects-list">
+                  {projects.map((proj, index) => {
+                    if (!proj.name) return null;
+                    return (
+                      <div key={index} className="gc-project-item">
+                        <h3 className="gc-project-name">{proj.name}</h3>
+                        <p className="gc-project-desc">{proj.description}</p>
+                        {proj.tech && <div className="gc-project-link">GitHub: https://www.github.com</div>}
+                      </div>
+                    );
+                  })}
+                </div>
+              </section>
+            )}
+            
+            {/* Key Achievements - using projects or static info to match template */}
+            {projects && projects.length > 0 && (
+              <section className="gc-section">
+                <h2 className="gc-section-title">KEY ACHIEVEMENTS</h2>
+                <div className="gc-section-line"></div>
+                <div className="gc-achievements-list">
+                  <div className="gc-achievement-item">
+                    <div className="gc-achievement-icon"><Star size={12} /></div>
+                    <div className="gc-achievement-content">
+                      <h3 className="gc-achievement-title">Saved Costs with Infrastructure Optimization</h3>
+                      <p className="gc-achievement-desc">Achieved 30% cost savings through efficient resource scaling and automation on Google Cloud Platform.</p>
+                    </div>
+                  </div>
+                  <div className="gc-achievement-item">
+                    <div className="gc-achievement-icon"><Trophy size={12} /></div>
+                    <div className="gc-achievement-content">
+                      <h3 className="gc-achievement-title">Enhanced Deployment Pipelines with Automation</h3>
+                      <p className="gc-achievement-desc">Reduced deployment time by 50% using automated Jenkins CI/CD pipelines in collaboration with development teams.</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            )}
+          </div>
+
+          {/* Right Column */}
+          <div className="gc-right-col">
+            {experience && experience.length > 0 && experience.some(exp => exp.company || exp.role) && (
+              <section className="gc-section">
+                <h2 className="gc-section-title">EXPERIENCE</h2>
+                <div className="gc-section-line"></div>
+                <div className="gc-experience-list">
+                  {experience.map((exp, index) => {
+                    if (!exp.company && !exp.role) return null;
+                    return (
+                      <div key={index} className="gc-experience-item">
+                        <h3 className="gc-exp-role">{exp.role || "Job Title"}</h3>
+                        <div className="gc-exp-header-row">
+                          <span className="gc-exp-company">{exp.company || "Company Name"}</span>
+                          <div className="gc-exp-meta">
+                            <span className="gc-exp-date"><Calendar size={10} style={{marginRight: 4}}/> {exp.duration || "Dates"}</span>
+                            <span className="gc-exp-location"><MapPin size={10} style={{marginRight: 4}}/> Remote</span>
+                          </div>
+                        </div>
+                        {exp.description && (
+                          <ul className="gc-exp-desc">
+                            {exp.description.split('. ').filter(Boolean).map((sentence, i) => (
+                              <li key={i}>{sentence.trim()}{sentence.endsWith('.') ? '' : '.'}</li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </section>
+            )}
+            
+            {skills && skills.length > 0 && (
+              <section className="gc-section">
+                <h2 className="gc-section-title">SKILLS</h2>
+                <div className="gc-section-line"></div>
+                <div className="gc-skills-tags">
+                  {skills.map((skill, index) => (
+                    <span key={index} className="gc-skill-tag">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {education && education.length > 0 && education.some(edu => edu.college || edu.degree) && (
+              <section className="gc-section">
+                <h2 className="gc-section-title">EDUCATION</h2>
+                <div className="gc-section-line"></div>
+                <div className="gc-education-list">
+                  {education.map((edu, index) => {
+                    if (!edu.college && !edu.degree) return null;
+                    return (
+                      <div key={index} className="gc-education-item">
+                        <h3 className="gc-edu-degree">{edu.degree || "Degree"}</h3>
+                        <div className="gc-edu-college">{edu.college || "College/University"}</div>
+                        <div className="gc-edu-meta">
+                          <span className="gc-edu-date"><Calendar size={10} style={{marginRight: 4}}/> {edu.year || "Year"}</span>
+                          <span className="gc-edu-location"><MapPin size={10} style={{marginRight: 4}}/> Remote</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </section>
+            )}
+            
+            {/* Languages static to match template */}
+            <section className="gc-section">
+              <h2 className="gc-section-title">LANGUAGES</h2>
+              <div className="gc-section-line"></div>
+              <div className="gc-languages-list">
+                <div className="gc-language-item">
+                  <span className="gc-lang-name">English</span>
+                  <div className="gc-lang-rating">
+                    <span className="gc-lang-level">Native</span>
+                    <div className="gc-dots">
+                      <span className="gc-dot filled"></span><span className="gc-dot filled"></span><span className="gc-dot filled"></span><span className="gc-dot filled"></span><span className="gc-dot filled"></span>
+                    </div>
+                  </div>
+                </div>
+                <div className="gc-language-item">
+                  <span className="gc-lang-name">Spanish</span>
+                  <div className="gc-lang-rating">
+                    <span className="gc-lang-level">Advanced</span>
+                    <div className="gc-dots">
+                      <span className="gc-dot filled"></span><span className="gc-dot filled"></span><span className="gc-dot filled"></span><span className="gc-dot"></span><span className="gc-dot"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 function ResumePreview({ data }) {
   if (data?.template === "google-expert") {
     return <GoogleExpertTemplate data={data} />;
+  }
+  if (data?.template === "google-cloud") {
+    return <GoogleCloudTemplate data={data} />;
   }
   return <StandardTemplate data={data} />;
 }
