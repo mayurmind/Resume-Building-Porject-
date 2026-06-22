@@ -4,8 +4,10 @@ import Navbar from "../components/Navbar";
 import ResumeCard from "../components/ResumeCard";
 import Footer from "../components/Footer";
 import DeleteModal from "../components/DeleteModal";
+import Loader from "../components/Loader";
 import API from "../services/api";
-import { Plus, FolderOpen, Loader2 } from "lucide-react";
+import { Plus, FolderOpen } from "lucide-react";
+import toast from "react-hot-toast";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -59,11 +61,11 @@ function Dashboard() {
       // 3. Post to create endpoint
       await API.post("/resume/create", clonedPayload);
       
-      // 4. Reload lists
       fetchResumes();
+      toast.success("Resume duplicated successfully");
     } catch (err) {
       console.error("Error duplicating resume:", err);
-      alert("Error duplicating resume: " + (err.response?.data?.error || err.message));
+      toast.error("Error duplicating resume: " + (err.response?.data?.error || err.message));
       setLoading(false);
     }
   };
@@ -77,11 +79,11 @@ function Dashboard() {
     if (!resumeToDeleteId) return;
     try {
       await API.delete(`/resume/${resumeToDeleteId}`);
-      alert("Resume deleted successfully");
+      toast.success("Resume deleted successfully");
       fetchResumes();
     } catch (err) {
       console.error("Error deleting resume:", err);
-      alert("Error deleting resume: " + (err.response?.data?.error || err.message));
+      toast.error("Error deleting resume: " + (err.response?.data?.error || err.message));
     } finally {
       setIsDeleteModalOpen(false);
       setResumeToDeleteId(null);
@@ -116,13 +118,7 @@ function Dashboard() {
         {/* Resumes Grid / Empty State / Loading */}
         <section className="dashboard-content">
           {loading ? (
-            <div className="dashboard-empty-state" style={{ borderStyle: "none" }}>
-              <div className="empty-icon-wrapper" style={{ animation: "spin 2s linear infinite" }}>
-                <Loader2 size={32} />
-              </div>
-              <h2>Loading resumes...</h2>
-              <p>Fetching your professional resume profiles.</p>
-            </div>
+            <Loader text="Loading resumes..." />
           ) : error ? (
             <div className="dashboard-empty-state">
               <h2>Error</h2>

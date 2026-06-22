@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import { RotateCcw } from "lucide-react";
 import API from "../services/api";
 import ExportPDF from "../components/ExportPDF";
+import Loader from "../components/Loader";
 
 const INITIAL_DATA = {
   title: "My Software Engineer Resume",
@@ -242,9 +243,7 @@ function Editor() {
       </div>
 
       {loading ? (
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh", color: "white", fontSize: "18px" }}>
-          <span>Loading resume details...</span>
-        </div>
+        <Loader fullScreen={true} text="Loading resume details..." />
       ) : error ? (
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", minHeight: "50vh", color: "white", gap: "16px" }}>
           <p style={{ color: "var(--color-primary, #ff3366)" }}>{error}</p>

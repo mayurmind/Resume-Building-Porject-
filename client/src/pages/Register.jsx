@@ -1,23 +1,22 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import AuthContext from "../context/AuthContext";
 import API from "../services/api";
+import toast from "react-hot-toast";
 
 function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
     try {
       await API.post("/auth/register", { name, email, password });
+      toast.success("Registration successful! Please login.");
       navigate("/login");
     } catch (err) {
-      setError(err.response?.data?.message || "Registration failed");
+      toast.error(err.response?.data?.message || "Registration failed");
     }
   };
 
@@ -25,7 +24,6 @@ function Register() {
     <div className="auth-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
       <div className="glass-card" style={{ width: '100%', maxWidth: '400px', padding: '40px', borderRadius: '16px' }}>
         <h2 style={{ textAlign: 'center', marginBottom: '24px', color: 'var(--color-primary)' }}>Create Account</h2>
-        {error && <div style={{ color: '#ff4d4f', marginBottom: '16px', textAlign: 'center' }}>{error}</div>}
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div>
             <label style={{ display: 'block', marginBottom: '8px', color: 'var(--color-text-muted)' }}>Name</label>

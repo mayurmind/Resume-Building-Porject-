@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { User, FileText, GraduationCap, Cpu, Briefcase, Code, Plus, Trash2, ChevronDown, ChevronUp, Save, Settings } from "lucide-react";
 import API from "../services/api";
+import toast from "react-hot-toast";
 
 function ResumeForm({
   id,
@@ -46,20 +47,16 @@ function ResumeForm({
         projects: data.projects
       };
       
-      let response;
       if (id) {
-        response = await API.put(`/resume/${id}`, payload);
-        console.log("Updated MongoDB document:", response.data);
-        alert("Resume Updated Successfully");
+        await API.put(`/resume/${id}`, payload);
+        toast.success("Resume Updated Successfully");
       } else {
-        response = await API.post("/resume/create", payload);
-        console.log("Returned MongoDB document:", response.data);
-        alert("Resume Saved Successfully");
+        await API.post("/resume/create", payload);
+        toast.success("Resume Saved Successfully");
       }
     } catch (error) {
       const errMsg = error.response?.data?.error || error.response?.data?.message || error.message;
-      console.error("Save Error:", errMsg);
-      alert("Error saving resume: " + errMsg);
+      toast.error("Error saving resume: " + errMsg);
     } finally {
       setIsSaving(false);
     }

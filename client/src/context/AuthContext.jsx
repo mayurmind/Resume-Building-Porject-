@@ -1,24 +1,15 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 import API from "../services/api";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Check for token on load
-    const storedToken = localStorage.getItem("token");
+  const [user, setUser] = useState(() => {
     const storedUser = localStorage.getItem("user");
-
-    if (storedToken && storedUser) {
-      setToken(storedToken);
-      setUser(JSON.parse(storedUser));
-    }
-    setLoading(false);
-  }, []);
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+  const [token, setToken] = useState(() => localStorage.getItem("token"));
+  const [loading] = useState(false);
 
   const login = (newToken, newUser) => {
     setToken(newToken);

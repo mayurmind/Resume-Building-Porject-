@@ -1,53 +1,48 @@
 import { useState, useContext, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
 import API from "../services/api";
+import toast from "react-hot-toast";
 
 function Profile() {
-  const { user, token, login, logout } = useContext(AuthContext);
+  const { user, login, logout } = useContext(AuthContext);
 
   // Profile Edit State
   const [name, setName] = useState(user?.name || "");
   const [email, setEmail] = useState(user?.email || "");
-  const [profileMessage, setProfileMessage] = useState("");
-  const [profileError, setProfileError] = useState("");
 
   // Password Change State
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [pwdMessage, setPwdMessage] = useState("");
-  const [pwdError, setPwdError] = useState("");
 
   useEffect(() => {
     if (user) {
+      /* eslint-disable react-hooks/set-state-in-effect */
       setName(user.name);
       setEmail(user.email);
+      /* eslint-enable react-hooks/set-state-in-effect */
     }
   }, [user]);
 
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
-    setProfileMessage("");
-    setProfileError("");
     try {
       const res = await API.put("/auth/profile", { name, email });
       login(res.data.token, res.data);
-      setProfileMessage("Profile updated successfully!");
+      toast.success("Profile updated successfully!");
     } catch (err) {
-      setProfileError(err.response?.data?.message || "Failed to update profile");
+      toast.error(err.response?.data?.message || "Failed to update profile");
     }
   };
 
   const handlePasswordChange = async (e) => {
     e.preventDefault();
-    setPwdMessage("");
-    setPwdError("");
     try {
       await API.put("/auth/change-password", { oldPassword, newPassword });
-      setPwdMessage("Password changed successfully!");
+      toast.success("Password changed successfully!");
       setOldPassword("");
       setNewPassword("");
     } catch (err) {
-      setPwdError(err.response?.data?.message || "Failed to change password");
+      toast.error(err.response?.data?.message || "Failed to change password");
     }
   };
 
@@ -59,8 +54,6 @@ function Profile() {
         {/* Profile Update Section */}
         <div className="glass-card" style={{ padding: '32px', borderRadius: '16px' }}>
           <h3 style={{ marginBottom: '24px', color: '#fff' }}>Edit Profile</h3>
-          {profileMessage && <div style={{ color: '#52c41a', marginBottom: '16px' }}>{profileMessage}</div>}
-          {profileError && <div style={{ color: '#ff4d4f', marginBottom: '16px' }}>{profileError}</div>}
           
           <form onSubmit={handleProfileUpdate} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div>
@@ -92,8 +85,6 @@ function Profile() {
         {/* Password Change Section */}
         <div className="glass-card" style={{ padding: '32px', borderRadius: '16px' }}>
           <h3 style={{ marginBottom: '24px', color: '#fff' }}>Change Password</h3>
-          {pwdMessage && <div style={{ color: '#52c41a', marginBottom: '16px' }}>{pwdMessage}</div>}
-          {pwdError && <div style={{ color: '#ff4d4f', marginBottom: '16px' }}>{pwdError}</div>}
           
           <form onSubmit={handlePasswordChange} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div>
