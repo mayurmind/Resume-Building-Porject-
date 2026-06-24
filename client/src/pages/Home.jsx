@@ -1,4 +1,5 @@
 import { ArrowRight, Layout, Download, Eye, Layers } from "lucide-react";
+import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import FeatureCard from "../components/FeatureCard";
 import ResumeMockup from "../components/ResumeMockup";
@@ -44,13 +45,13 @@ function Home() {
             Create beautiful resumes with modern templates and export them as PDF in minutes. Designed to beat the ATS systems and impress hiring managers.
           </p>
           <div className="hero-buttons">
-            <a href="/editor" className="btn-primary">
+            <Link to="/editor" className="btn-primary">
               Start Building
               <ArrowRight size={18} />
-            </a>
-            <a href="/templates" className="btn-secondary">
+            </Link>
+            <Link to="/templates" className="btn-secondary">
               Explore Templates
-            </a>
+            </Link>
           </div>
         </div>
 

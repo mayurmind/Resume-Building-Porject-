@@ -1,6 +1,6 @@
 import { Eye, Edit3 } from "lucide-react";
 
-function TemplateCard({ id, name, category, description, onUseTemplate }) {
+function TemplateCard({ id, name, category, description, onUseTemplate, onPreview }) {
   // Helper to render mock representation of the template structure
   const renderTemplateMockup = () => {
     switch (id) {
@@ -70,6 +70,42 @@ function TemplateCard({ id, name, category, description, onUseTemplate }) {
             </div>
           </div>
         );
+      case "google-expert":
+        return (
+          <div className="template-mock professional-mock">
+            <div className="mock-body" style={{ flexDirection: "column" }}>
+              <div className="mock-header-line" style={{ width: "100%", height: "20px" }}></div>
+              <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
+                <div className="mock-main" style={{ width: "60%" }}>
+                  <div className="mock-block"></div>
+                  <div className="mock-block"></div>
+                </div>
+                <div className="mock-sidebar right" style={{ width: "40%" }}>
+                  <div className="mock-block"></div>
+                  <div className="mock-block"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      case "google-cloud":
+        return (
+          <div className="template-mock professional-mock">
+            <div className="mock-body" style={{ flexDirection: "column" }}>
+              <div className="mock-header-line" style={{ width: "100%", height: "20px", background: "var(--color-primary)" }}></div>
+              <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
+                <div className="mock-main" style={{ width: "50%" }}>
+                  <div className="mock-block"></div>
+                  <div className="mock-block"></div>
+                </div>
+                <div className="mock-sidebar right" style={{ width: "50%" }}>
+                  <div className="mock-block"></div>
+                  <div className="mock-block"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
       case "ats-friendly":
       default:
         return (
@@ -95,7 +131,7 @@ function TemplateCard({ id, name, category, description, onUseTemplate }) {
       <div className="template-preview-area">
         {renderTemplateMockup()}
         <div className="template-card-overlay">
-          <button className="preview-btn-overlay" title="Preview Template">
+          <button className="preview-btn-overlay" title="Preview Template" onClick={(e) => { e.stopPropagation(); onPreview && onPreview(id); }}>
             <Eye size={18} />
             <span>Preview</span>
           </button>
@@ -110,7 +146,7 @@ function TemplateCard({ id, name, category, description, onUseTemplate }) {
         <p className="template-desc">{description}</p>
         
         <div className="template-actions">
-          <button className="template-btn secondary">
+          <button className="template-btn secondary" onClick={() => onPreview && onPreview(id)}>
             <Eye size={15} />
             Preview
           </button>

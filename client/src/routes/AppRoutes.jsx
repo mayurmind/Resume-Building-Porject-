@@ -12,6 +12,7 @@ import PageWrapper from "../components/PageWrapper";
 import TermsOfService from "../pages/TermsOfService";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
 import Sitemap from "../pages/Sitemap";
+import Preview from "../pages/Preview";
 
 function AppRoutes() {
   return (
@@ -28,6 +29,7 @@ function AppRoutes() {
         <Route element={<ProtectedRoute />}>
           <Route path="/editor" element={<Editor />} />
           <Route path="/editor/:id" element={<Editor />} />
+          <Route path="/preview/:id" element={<Preview />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
         </Route>

@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { Sparkles, Menu, X, ArrowRight } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 function Navbar() {
@@ -30,17 +30,17 @@ function Navbar() {
   return (
     <div className={`navbar-wrapper ${isScrolled ? "scrolled" : ""}`}>
       <nav className="navbar">
-        <a href="/" className="logo">
+        <Link to="/" className="logo">
           <Sparkles size={20} className="logo-icon" style={{ color: "var(--color-primary)" }} />
           ResumeForge
           <span className="logo-dot"></span>
-        </a>
+        </Link>
 
         <div className="nav-links">
-          <a href="/" className={window.location.pathname === "/" ? "active" : ""}>Home</a>
-          <a href="/templates" className={window.location.pathname === "/templates" ? "active" : ""}>Templates</a>
-          {token && <a href="/dashboard" className={window.location.pathname === "/dashboard" ? "active" : ""}>Dashboard</a>}
-          {token && <a href="/profile" className={window.location.pathname === "/profile" ? "active" : ""}>Profile</a>}
+          <Link to="/" className={window.location.pathname === "/" ? "active" : ""}>Home</Link>
+          <Link to="/templates" className={window.location.pathname === "/templates" ? "active" : ""}>Templates</Link>
+          {token && <Link to="/dashboard" className={window.location.pathname === "/dashboard" ? "active" : ""}>Dashboard</Link>}
+          {token && <Link to="/profile" className={window.location.pathname === "/profile" ? "active" : ""}>Profile</Link>}
         </div>
 
         <div className="nav-actions">
@@ -61,7 +61,7 @@ function Navbar() {
             </>
           ) : (
             <>
-              <a href="/login" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontWeight: '500' }}>Login</a>
+              <Link to="/login" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontWeight: '500' }}>Login</Link>
               <button className="create-btn" onClick={() => navigate("/register")}>
                 Register
                 <ArrowRight size={16} />
@@ -95,10 +95,10 @@ function Navbar() {
           zIndex: 999,
           backdropFilter: "blur(16px)"
         }}>
-          <a href="/" style={{ color: "white", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>Home</a>
-          <a href="/templates" style={{ color: "var(--color-text-muted)", textDecoration: "none", fontSize: "16px" }}>Templates</a>
-          {token && <a href="/dashboard" style={{ color: "var(--color-text-muted)", textDecoration: "none", fontSize: "16px" }}>Dashboard</a>}
-          {token && <a href="/profile" style={{ color: "var(--color-text-muted)", textDecoration: "none", fontSize: "16px" }}>Profile</a>}
+          <Link to="/" style={{ color: "white", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>Home</Link>
+          <Link to="/templates" style={{ color: "var(--color-text-muted)", textDecoration: "none", fontSize: "16px" }}>Templates</Link>
+          {token && <Link to="/dashboard" style={{ color: "var(--color-text-muted)", textDecoration: "none", fontSize: "16px" }}>Dashboard</Link>}
+          {token && <Link to="/profile" style={{ color: "var(--color-text-muted)", textDecoration: "none", fontSize: "16px" }}>Profile</Link>}
           {token ? (
             <>
               <button className="create-btn" style={{ width: "100%", justifyContent: "center" }} onClick={() => { navigate("/templates"); setMobileMenuOpen(false); }}>
@@ -111,7 +111,7 @@ function Navbar() {
             </>
           ) : (
             <>
-              <a href="/login" style={{ color: "var(--color-text-muted)", textDecoration: "none", fontSize: "16px" }}>Login</a>
+              <Link to="/login" style={{ color: "var(--color-text-muted)", textDecoration: "none", fontSize: "16px" }}>Login</Link>
               <button className="create-btn" style={{ width: "100%", justifyContent: "center" }} onClick={() => { navigate("/register"); setMobileMenuOpen(false); }}>
                 Register
                 <ArrowRight size={16} />

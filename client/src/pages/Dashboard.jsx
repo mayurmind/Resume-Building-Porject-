@@ -90,8 +90,8 @@ function Dashboard() {
     }
   };
 
-  const handleDownload = () => {
-    navigate("/editor");
+  const handleDownload = (id) => {
+    navigate(`/preview/${id}`);
   };
 
   const handleCreate = () => {
