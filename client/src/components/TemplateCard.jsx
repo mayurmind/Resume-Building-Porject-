@@ -146,10 +146,6 @@ function TemplateCard({ id, name, category, description, onUseTemplate, onPrevie
         <p className="template-desc">{description}</p>
         
         <div className="template-actions">
-          <button className="template-btn secondary" onClick={() => onPreview && onPreview(id)}>
-            <Eye size={15} />
-            Preview
-          </button>
           <button className="template-btn primary" onClick={() => onUseTemplate(id)}>
             <Edit3 size={15} />
             Use Template

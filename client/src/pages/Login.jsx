@@ -3,15 +3,18 @@ import { useNavigate, Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import API from "../services/api";
 import toast from "react-hot-toast";
+import { Sparkles, Mail, Lock, ArrowRight } from "lucide-react";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     try {
       const res = await API.post("/auth/login", { email, password });
       login(res.data.token, res.data);
@@ -19,40 +22,68 @@ function Login() {
       navigate("/dashboard");
     } catch (err) {
       toast.error(err.response?.data?.message || "Login failed");
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="auth-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
-      <div className="glass-card" style={{ width: '100%', maxWidth: '400px', padding: '40px', borderRadius: '16px' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '24px', color: 'var(--color-primary)' }}>Login</h2>
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <div>
-            <label style={{ display: 'block', marginBottom: '8px', color: 'var(--color-text-muted)' }}>Email</label>
-            <input 
-              type="email" 
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)} 
-              required 
-              style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'var(--glass-bg)', color: '#fff' }}
-            />
+    <div className="auth-page">
+      <div className="auth-bg-orb-1"></div>
+      <div className="auth-bg-orb-2"></div>
+      
+      <div className="auth-card-wrapper">
+        <div className="auth-card">
+          <div className="auth-header">
+            <Link to="/" className="auth-logo">
+              <Sparkles size={24} style={{ color: "var(--color-primary)" }} />
+              ResumeForge
+            </Link>
+            <h2 className="auth-title">Welcome back</h2>
+            <p className="auth-subtitle">Enter your details to access your account.</p>
           </div>
-          <div>
-            <label style={{ display: 'block', marginBottom: '8px', color: 'var(--color-text-muted)' }}>Password</label>
-            <input 
-              type="password" 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
-              required 
-              style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'var(--glass-bg)', color: '#fff' }}
-            />
+          
+          <form className="auth-form" onSubmit={handleSubmit}>
+            <div className="auth-input-group">
+              <label className="auth-label">Email Address</label>
+              <div style={{ position: "relative" }}>
+                <Mail size={18} style={{ position: "absolute", left: "16px", top: "50%", transform: "translateY(-50%)", color: "var(--color-text-muted)" }} />
+                <input 
+                  type="email" 
+                  className="auth-input"
+                  placeholder="you@example.com"
+                  value={email} 
+                  onChange={(e) => setEmail(e.target.value)} 
+                  required 
+                  style={{ paddingLeft: "44px" }}
+                />
+              </div>
+            </div>
+            
+            <div className="auth-input-group">
+              <label className="auth-label">Password</label>
+              <div style={{ position: "relative" }}>
+                <Lock size={18} style={{ position: "absolute", left: "16px", top: "50%", transform: "translateY(-50%)", color: "var(--color-text-muted)" }} />
+                <input 
+                  type="password" 
+                  className="auth-input"
+                  placeholder="••••••••"
+                  value={password} 
+                  onChange={(e) => setPassword(e.target.value)} 
+                  required 
+                  style={{ paddingLeft: "44px" }}
+                />
+              </div>
+            </div>
+            
+            <button type="submit" className="auth-submit-btn" disabled={isSubmitting} style={{ opacity: isSubmitting ? 0.7 : 1 }}>
+              {isSubmitting ? "Signing in..." : "Sign in"}
+              {!isSubmitting && <ArrowRight size={18} />}
+            </button>
+          </form>
+          
+          <div className="auth-footer">
+            Don't have an account? <Link to="/register" className="auth-link">Create one</Link>
           </div>
-          <button type="submit" className="create-btn" style={{ width: '100%', justifyContent: 'center', marginTop: '8px' }}>
-            Login
-          </button>
-        </form>
-        <div style={{ marginTop: '24px', textAlign: 'center', color: 'var(--color-text-muted)' }}>
-          Don't have an account? <Link to="/register" style={{ color: 'var(--color-primary)', textDecoration: 'none' }}>Register</Link>
         </div>
       </div>
     </div>
